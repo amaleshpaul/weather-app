@@ -1,17 +1,16 @@
 const express = require('express')
 const request = require('request');
-
-const port=process.env.PORT || 3000
 const bodyParser = require('body-parser');
 const app = express()
 
+const port = process.env.PORT || 3000
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 app.get('/', function (req, res) {
-  res.render('index');
+  res.render('index', {weather: null, error: 'Please put city name'});
 })
 
 app.post('/', function (req, res) {
@@ -37,5 +36,5 @@ app.post('/', function (req, res) {
 })
 
 app.listen(port, function () {
-  console.log(`Example app listening on port `+port)
+  console.log(`App running on Port `+port)
 })
